@@ -1,0 +1,22 @@
+Package: pmap.utilities
+Title: API to PMPA Projections
+Version: 1.0.0.0002
+Authors@R:
+    person(given = "Luke",
+           family = "Mullany",
+           role = c("aut", "cre"),
+           email = "Luke.Mullany@jhuapl.edu")
+Description: Provides convenience functions to access PMAP SQL Projections
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    dplyr,
+    dbplyr,
+    DBI,
+    odbc,
+    askpass,
+    magrittr,
+    data.table
+License: MIT + file LICENSE
