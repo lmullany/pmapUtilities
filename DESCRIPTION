@@ -16,7 +16,7 @@ Imports:
     dbplyr,
     DBI,
     odbc,
-    askpass,
     magrittr,
-    data.table
+    data.table,
+    getPass
 License: MIT + file LICENSE

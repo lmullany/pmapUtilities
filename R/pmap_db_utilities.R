@@ -27,7 +27,7 @@ get_sql_connection <- function(dbname,
                       server=server,
                       database=dbname,
                       uid=user,
-                      pwd=askpass::askpass(paste0("Enter Password for ", username, ": ")),
+                      pwd=getPass::getPass(paste0("Enter Password for ", username, ": ")),
                       TDS_version=tdsver)
 
   if(verbose) print(con)
