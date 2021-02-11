@@ -39,5 +39,5 @@ be filtered using a where clause, or sub-setting by specified columns/number of 
 \examples{
 return_table(table="encounters", engine = myconnection)
 return_table(table="encounters", columns = c("osler_id"), max_rows=10000, engine = myconnection)
-return_table("MHAODS", "STUSHH", columns = c("HOFC_WRK_UNIT_UID", "STUS_CD"), max_rows=10000, filter "year(SRC_SYS_INSRT)=2019", engine = myconnection)
+return_table(table="encounters", max_rows=10000, filter="encounter_type='Appointment'", engine = myconnection)
 }

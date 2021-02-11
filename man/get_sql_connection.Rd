@@ -26,9 +26,16 @@ get_sql_connection(
 
 \item{verbose}{(logical, default=FALSE; if TRUE will provide some details of the connection)}
 }
+\value{
+Database connection object as returned by \code{DBI::dbConnect()}
+}
 \description{
-This function generates a connection object
+This function generates a connection object. Note that most of the functions in pmap.utilities
+package require the specification of connection engine in the \code{engine} parameter of the function.
+However, all functions in the package requiring a connection will look for \code{default_engine} in the
+global environment, thus it is convenient (and recommended) to assign the return value of this
+to a variable called \code{default_engine}.
 }
 \examples{
-get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
+default_engine = get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
 }

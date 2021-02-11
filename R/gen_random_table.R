@@ -1,12 +1,11 @@
-#' Generate a temp table in the database holding a random set of WRK UNITS
+#' Generate a temp table in the database holding a random set of ids
 #'
 #' This function enables the user to generate a temporary table in the database
 #' that will persist for this connection/session, and that can be utilized in
 #' subsequent queries, in order to consistently restrict to that subset.  This may
-#' be helpful for users to execute an analytic pipeline on a random set of work
-#' units rather than the full set.
+#' be helpful for users to execute an analytic pipeline on a random set of ids.
 #'
-#' @param size number of unique HOFC_WRK_UNIT_UIDs to return (default 1000)
+#' @param size number of unique ids to return (default 1000)
 #' @param filter string expressed as a SQL where clause on MHAODS.WRKUNH. The clause must begin with
 #' "WHERE " Examples include:
 #'
@@ -23,33 +22,41 @@
 #'  to this \code{tempname} in order to limit the results of that query to this
 #'  random subset (See example below).
 #'
+#' @param table string table name to query
+#' @param idvars vector of string column names that define uniqueness on the table (i.e. the primary key)
+#' @param schema name of schema (default "dbo")
+#' @param size number of rows to return (default=1000)
+#' @param filter string 'WHERE' clause to further restrict the selection
 #' @param seed integer seed for reproducibility; if no seed is provided, a non-reproducible temp table will be produced
 #' @param engine a dbConnect connection object; by default will look in namespace for default_engine
 #' @export
 #' @return a string name of the temporary table created
 #' @examples
-#' rnduids <- gen_random_wrk_unit_table(size = 1000, filter="WHERE MHAODS.WRKUNH.PRC_LVL_CD='H'", seed = 123)
-#' rnduids <- gen_random_wrk_unit_table(size = 100, seed=87634)
-#' rnduids <- gen_random_wrk_unit_table(size = 250000, seed=10, engine=myconn)
-#'
-#' # Use this handle to the temp table
-#' return_table("dbo",rnduids)
-#'
-#' # Use this handle to restrict to another table (for example, pulling all
-#' ARCHWKUT information)
-#' return_table("MHAODS","ARCHWKUT",rnd_wrk_units=rnduids)
-#'
-#'
-#'
-#'
-gen_random_wrk_unit_table <- function(size=1000,filter=NULL,seed=NULL, engine=default_engine) {
+#' rnduids <- gen_random_table(table= "patient", idvars = "osler_id", size = 1000, seed=123)
+#' rnduids <- gen_random_table(table= "patient", idvars = "osler_id", size = 100, seed=87634)
+#' rnduids <- gen_random_table(table= "patient", idvars = "osler_id", filter = "WHERE gender = 'Male'", size = 100, seed=87634)
+gen_random_table <- function(table,
+                                      idvars,
+                                      schema="dbo",
+                                      size=1000,
+                                      filter=NULL,
+                                      seed=NULL,
+                                      engine=default_engine) {
+
+  aliased_idvars = paste(paste0("S.",idvars), collapse=",")
+  unaliased_idvars = paste(idvars,collapse=",")
+
+  random_table_name = gen_random_temp_table_name()
+
 
   #One option: if the filter is NULL, use the method below
   #get random numbers
 
+
+
   if(is.null(filter)) {
 
-    maxlength <- get_table_dim("MHAODS","WRKUNH",engine=engine)[1]
+    maxlength <- get_table_dim(table = table, schema = schema, exact = TRUE,engine=engine)[1]
 
     #gen random indices table and save name
     random_indices_name <- suppressMessages(
@@ -59,19 +66,21 @@ gen_random_wrk_unit_table <- function(size=1000,filter=NULL,seed=NULL, engine=de
     )
 
     # generate the query
-    qry = paste0("select T.HOFC_WRK_UNIT_UID FROM ",
-                 "(SELECT HOFC_WRK_UNIT_UID, ROW_NUMBER() OVER(ORDER by HOFC_WRK_UNIT_UID) AS ID from MHAODS.WRKUNH) AS T ",
-                 "INNER JOIN [",random_indices_name$tempname,"] AS S ON S.ID=T.ID")
+    qry = paste0("select ", aliased_idvars, " FROM ",
+                 "(SELECT ", unaliased_idvars, ", ROW_NUMBER() OVER(ORDER by ", unaliased_idvars,") AS ID from ", schema,".",table," ) AS S ",
+                 "INNER JOIN [",random_indices_name$tempname,"] AS T ON T.ID=S.ID")
   } else {
-    # 1. create a temp table of the filtered WRKUNH,
-    qry = paste0("select HOFC_WRK_UNIT_UID,ROW_NUMBER() OVER(ORDER by HOFC_WRK_UNIT_UID) AS ID ",
-                 "INTO #SUBWRK ",
-                 "FROM MHAODS.WRKUNH ",filter)
+    # 1. create a temp table of the filtered table,
+    qry = paste0("select ",unaliased_idvars,",ROW_NUMBER() OVER(ORDER by ",unaliased_idvars,") AS ID ",
+                 "INTO ", random_table_name, " ",
+                 "FROM ",schema,".",table, " ",filter)
 
-    # 2. find out how many rows this, at the same time as executing it
-    tryCatch(DBI::dbRemoveTable(conn=engine,"#SUBWRK"),
+    # before creating, drop if exists temp table
+    tryCatch(DBI::dbRemoveTable(conn=engine,random_table_name),
              error=function(e) {},
              warning=function(w) {})
+
+    # 2. find out how many rows this, at the same time as executing it
     rows_affected <- DBI::dbExecute(conn = engine,qry,immediate=TRUE,)
 
     # 3. get random indicine within 0 to number of rows in the subquery
@@ -82,12 +91,17 @@ gen_random_wrk_unit_table <- function(size=1000,filter=NULL,seed=NULL, engine=de
       )
 
     # 4. Create the query to select from #subwrk only these indices
-    qry= paste0("SELECT S.HOFC_WRK_UNIT_UID FROM #SUBWRK AS S ",
+    qry= paste0("SELECT ",aliased_idvars," FROM ",random_table_name," AS S ",
                 "INNER JOIN ",random_indices_name$tempname," AS T ON T.ID=S.ID")
 
   }
 
-  tname <- suppressMessages(dplyr::compute(query_db(query = qry, engine=engine))[[2]]$x)
+
+  tname <- suppressMessages(
+    dplyr::compute(
+      query_db(query = qry, engine=engine),
+      name=random_table_name
+      )[[2]]$x)
 
   #Now, issue a warning if random_indices is less than requested
   if(random_indices_name$tempsize<size) {
@@ -104,7 +118,7 @@ gen_random_wrk_unit_table <- function(size=1000,filter=NULL,seed=NULL, engine=de
 #' This is a helper function, that produces a random set of distinct integers between
 #' 1 and maxlength, inclusive.
 #'
-#' @param size number of unique HOFC_WRK_UNIT_UIDs to return (default 1000)
+#' @param size number of ids to return (default 1000)
 #' @return a string name of the temporary table created
 #' @export
 #' @keywords internal
@@ -128,14 +142,17 @@ gen_temp_indices <- function(size=1000, max_index, seed=NULL, engine=default_eng
     rnd_set <- sample(x=1:max_index,size=size,replace=F)
   }
 
+  indices_table_name = gen_random_temp_table_name()
 
-  # push to temporary table (lets_give it a specific name)
-  #dplyr::db_drop_table(con=engine,table = "#_temp_rnd_indices",force=TRUE)
   tryCatch(
-    DBI::dbRemoveTable(conn=engine,"#_temp_rnd_indices"),
+    DBI::dbRemoveTable(conn=engine,indices_table_name),
     error = function(e) {}
   )
-  temp_rnd_indices <- dplyr::copy_to(dest = engine, data.frame(id=rnd_set),name="_temp_rnd_indices",indexes=list("id"))
+  temp_rnd_indices <- dplyr::copy_to(
+    dest = engine,
+    data.frame(id=rnd_set),
+    name=indices_table_name,
+    indexes=list("id"))
 
   #return the temp table name back to calling function, and the size
   return(list(tempname = as.character(temp_rnd_indices$ops$x),tempsize=ret_size))

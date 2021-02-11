@@ -1,15 +1,22 @@
+
+
 #' Generate a dbConnect object to the SQL database
 #'
-#' This function generates a connection object
+#' This function generates a connection object. Note that most of the functions in pmap.utilities
+#' package require the specification of connection engine in the `engine` parameter of the function.
+#' However, all functions in the package requiring a connection will look for `default_engine` in the
+#' global environment, thus it is convenient (and recommended) to assign the return value of this
+#' to a variable called `default_engine`.
 #' @param dbname string name of database to connect to
 #' @param username username for the database connection
 #' @param server defaults to 'ESMPMDBPR4.WIN.AD.JHU.EDU', but another string server could be provided
 #' @param driver defaults to 'FreeTDS'
 #' @param tdsver defaults to "8.0"
 #' @param verbose (logical, default=FALSE; if TRUE will provide some details of the connection)
+#' @return Database connection object as returned by `DBI::dbConnect()`
 #' @export
 #' @examples
-#' get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
+#' default_engine = get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
 
 get_sql_connection <- function(dbname,
                                username,
@@ -31,6 +38,8 @@ get_sql_connection <- function(dbname,
                       TDS_version=tdsver)
 
   if(verbose) print(con)
+  cat("Note: name/rename your connection as 'default_engine' to avoid\n",
+      "specifying an engine in subsequent pmap.utilities:: functions\n")
   return(invisible(con))
 }
 
@@ -68,18 +77,11 @@ query_db <- function(query, engine = default_engine) {
 #' @examples
 #' return_table(table="encounters", engine = myconnection)
 #' return_table(table="encounters", columns = c("osler_id"), max_rows=10000, engine = myconnection)
-#' return_table("MHAODS", "STUSHH", columns = c("HOFC_WRK_UNIT_UID", "STUS_CD"), max_rows=10000, filter "year(SRC_SYS_INSRT)=2019", engine = myconnection)
+#' return_table(table="encounters", max_rows=10000, filter="encounter_type='Appointment'", engine = myconnection)
 
 return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
                          filter_condition = NULL, rnd_wrk_units=NULL,
                          engine = default_engine) {
-
-  # if(!is.null(rnd_wrk_units)) {
-  #   filter_condition <- dplyr::if_else(is.null(filter_condition),"", paste0(filter_condition, " AND "))
-  #   filter_condition <- paste0(filter_condition,
-  #                              " HOFC_WRK_UNIT_UID IN (SELECT HOFC_WRK_UNIT_UID FROM ",
-  #                              rnd_wrk_units,")")
-  # }
 
   query = construct_table_query(schema = schema,
                                 table=table,
@@ -151,14 +153,21 @@ list_schemas <- function(engine = default_engine) {
 #'
 #' Function returns a character vector of all table names found in a given schema
 #' @param schema a string name of schema to search, default="dbo"
+#' @param show_dimensions logical (default FALSE); set this to TRUE to additionally return the size of the
+#' tables (number of rows and columns)
+#' @param exact logical (default FALSE); only relevant for show dimensions; if this is FALSE, then
+#' table dimensions will be estimated using sys.dm_db_partition_stats table, for which permission may not
+#' be provided to the user. In that case, this parameter can be set to TRUE to get exact dimensions,
+#' which will be slower (sometimes substantially so, if many tables, and those tables are large), but will
+#' be more accurate.
 #' @param engine a dbConnect connection object; by default will look in namespace for default_engine
 #' @export
 #' @import data.table
-#' @return character vector of table names
+#' @return data.table of with column of table names, and optionally, columns for number of rows and columns
 #' @examples
-#' list_tables('MIDIB',myconnection)
-#'
-list_tables <- function(schema="dbo", show_dimensions=FALSE, engine = default_engine) {
+#' list_tables(engine=myconnection)
+#' list_tables(schema="dbo",show_dimensions=TRUE, engine=myconnection)
+list_tables <- function(schema="dbo", show_dimensions=FALSE, exact=FALSE, engine = default_engine) {
   table_names = query_db(query = paste0("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
                                         WHERE table_schema='",schema,"' AND TABLE_TYPE = 'BASE TABLE'"),
                          engine = engine) %>%
@@ -168,11 +177,11 @@ list_tables <- function(schema="dbo", show_dimensions=FALSE, engine = default_en
   table_names = dplyr::pull(table_names, TABLE_NAME)
 
   if(!show_dimensions) {
-    return(table_names)
+    return(data.table::data.table("table" =  table_names))
   } else {
     tdetail = data.table::rbindlist(
       lapply(table_names, function(x) {
-        dims = get_table_dim(x,engine=engine,exact=T)
+        dims = get_table_dim(x,engine=engine,exact=exact)
         data.table::data.table("table"=x,"rows"=dims[1], "cols"=dims[2])
     }))
     return(tdetail)
@@ -189,7 +198,7 @@ list_tables <- function(schema="dbo", show_dimensions=FALSE, engine = default_en
 #' @export
 #' @return character vector of view names
 #' @examples
-#' list_views('MIDIB',myconnection)
+#' list_views(engine = myconnection)
 #'
 list_views <- function(schema="dbo", engine = default_engine) {
   view_names = query_db(query = paste0("SELECT TABLE_NAME as VIEW_NAME FROM INFORMATION_SCHEMA.TABLES
@@ -232,7 +241,7 @@ get_view_definition <- function(view, schema="dbo",engine = default_engine) {
 #' @export
 #' @return character vector of column names
 #' @examples
-#' list_columns('CASEDOC',schema="dbo", engine=myconnection)
+#' list_columns('medications',schema="dbo", engine=myconnection)
 #'
 
 list_columns <- function(table, schema="dbo",engine = default_engine) {
@@ -244,8 +253,9 @@ list_columns <- function(table, schema="dbo",engine = default_engine) {
 #' Get the dimensions (rows and columns) of a given table in a schema
 #'
 #' Function returns a named vector of rows (number of rows) and cols (number of cols). This query
-#' uses the sys.dm_db_partition_stats table; in a live database with inserts/deletions, etc this
-#' will not be exact; if an exact count is required, the `exact` parameter can be set to TRUE
+#' uses the sys.dm_db_partition_stats table (if permission); in a live database with inserts/deletions, etc this
+#' will not be exact; if an exact count is required, or permission to access sys.dm_db_partition_stats table
+#' is not granted, the `exact` parameter can be set to TRUE
 #' @param table a string name of table to search
 #' @param schema a string name of schema to search;default="dbo"
 #' @param engine a dbConnect connection object; by default will look in namespace for default_engine
@@ -253,8 +263,8 @@ list_columns <- function(table, schema="dbo",engine = default_engine) {
 #' @export
 #' @return a vector of rows and cols
 #' @examples
-#' get_table_dim(CASEDOC',schema="dbo", engine=myconnection)
-#' get_table_dim(CASEDOC',schema="dbo", engine=myconnection, exact=T)
+#' get_table_dim(problemlist',schema="dbo", engine=myconnection)
+#' get_table_dim(problemlist',schema="dbo", engine=myconnection, exact=TRUE)
 
 get_table_dim <- function(table,schema="dbo", engine=default_engine, exact=FALSE) {
   if(!exact) {
@@ -265,9 +275,13 @@ get_table_dim <- function(table,schema="dbo", engine=default_engine, exact=FALSE
     query = sprintf("SELECT nrows = COUNT(1) FROM [%s].[%s] ", schema, table)
   }
 
-  rows=as.double(query_db(query, engine) %>%
+  rows=try(as.double(query_db(query, engine) %>%
                    dplyr::collect() %>%
-                   dplyr::pull(nrows))
+                   dplyr::pull(nrows)), silent=T)
+  if(inherits(rows,"try-error")) {
+    stop("Error: Dimension Retrieval Failed; perhaps permission not granted; try setting exact to TRUE",
+         call. = F)
+  }
 
   cols=length(list_columns(table=table, schema=schema,engine=engine))
   return(c('rows'=rows,'cols'=cols))

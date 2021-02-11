@@ -20,10 +20,11 @@ a vector of rows and cols
 }
 \description{
 Function returns a named vector of rows (number of rows) and cols (number of cols). This query
-uses the sys.dm_db_partition_stats table; in a live database with inserts/deletions, etc this
-will not be exact; if an exact count is required, the \code{exact} parameter can be set to TRUE
+uses the sys.dm_db_partition_stats table (if permission); in a live database with inserts/deletions, etc this
+will not be exact; if an exact count is required, or permission to access sys.dm_db_partition_stats table
+is not granted, the \code{exact} parameter can be set to TRUE
 }
 \examples{
-get_table_dim(CASEDOC',schema="dbo", engine=myconnection)
-get_table_dim(CASEDOC',schema="dbo", engine=myconnection, exact=T)
+get_table_dim(problemlist',schema="dbo", engine=myconnection)
+get_table_dim(problemlist',schema="dbo", engine=myconnection, exact=TRUE)
 }

@@ -20,6 +20,6 @@ character vector of column names
 Function returns a character vector of all column names in a table
 }
 \examples{
-list_columns('CASEDOC',schema="dbo", engine=myconnection)
+list_columns('medications',schema="dbo", engine=myconnection)
 
 }

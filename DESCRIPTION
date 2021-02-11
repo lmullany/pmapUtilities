@@ -1,5 +1,5 @@
 Package: pmap.utilities
-Title: API to PMPA Projections
+Title: API to PMAP Projections
 Version: 1.0.0.0002
 Authors@R:
     person(given = "Luke",

@@ -4,20 +4,34 @@
 \alias{list_tables}
 \title{List tables in a given schema}
 \usage{
-list_tables(schema = "dbo", show_dimensions = FALSE, engine = default_engine)
+list_tables(
+  schema = "dbo",
+  show_dimensions = FALSE,
+  exact = FALSE,
+  engine = default_engine
+)
 }
 \arguments{
 \item{schema}{a string name of schema to search, default="dbo"}
 
+\item{show_dimensions}{logical (default FALSE); set this to TRUE to additionally return the size of the
+tables (number of rows and columns)}
+
+\item{exact}{logical (default FALSE); only relevant for show dimensions; if this is FALSE, then
+table dimensions will be estimated using sys.dm_db_partition_stats table, for which permission may not
+be provided to the user. In that case, this parameter can be set to TRUE to get exact dimensions,
+which will be slower (sometimes substantially so, if many tables, and those tables are large), but will
+be more accurate.}
+
 \item{engine}{a dbConnect connection object; by default will look in namespace for default_engine}
 }
 \value{
-character vector of table names
+data.table of with column of table names, and optionally, columns for number of rows and columns
 }
 \description{
 Function returns a character vector of all table names found in a given schema
 }
 \examples{
-list_tables('MIDIB',myconnection)
-
+list_tables(engine=myconnection)
+list_tables(schema="dbo",show_dimensions=TRUE, engine=myconnection)
 }

@@ -18,6 +18,6 @@ character vector of view names
 Function returns a character vector of all view names found in a given schema
 }
 \examples{
-list_views('MIDIB',myconnection)
+list_views(engine = myconnection)
 
 }
