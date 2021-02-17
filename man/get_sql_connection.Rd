@@ -10,7 +10,8 @@ get_sql_connection(
   server = "ESMPMDBPR4.WIN.AD.JHU.EDU",
   driver = "FreeTDS",
   tdsver = "8.0",
-  verbose = F
+  verbose = F,
+  trusted = F
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ get_sql_connection(
 \item{tdsver}{defaults to "8.0"}
 
 \item{verbose}{(logical, default=FALSE; if TRUE will provide some details of the connection)}
+
+\item{trusted}{(logical, default=FALSE); if set to TRUE, will attempt a trusted connection using
+ODBC Driver 17 for SQL SERVER and Trusted_Connection="yes"}
 }
 \value{
 Database connection object as returned by \code{DBI::dbConnect()}
