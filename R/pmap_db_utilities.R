@@ -13,6 +13,8 @@
 #' @param driver defaults to 'FreeTDS'
 #' @param tdsver defaults to "8.0"
 #' @param verbose (logical, default=FALSE; if TRUE will provide some details of the connection)
+#' @param trusted (logical, default=FALSE); if set to TRUE, will attempt a trusted connection using
+#' ODBC Driver 17 for SQL SERVER and Trusted_Connection="yes"
 #' @return Database connection object as returned by `DBI::dbConnect()`
 #' @export
 #' @examples
@@ -23,19 +25,30 @@ get_sql_connection <- function(dbname,
                                server='ESMPMDBPR4.WIN.AD.JHU.EDU',
                                driver='FreeTDS',
                                tdsver="8.0",
-                               verbose=F) {
+                               verbose=F,
+                               trusted=F) {
 
-  user = paste0("win\\",username)
   port = 1433
 
-  con<-DBI::dbConnect(odbc::odbc(),
-                      port=port,
-                      driver=driver,
-                      server=server,
-                      database=dbname,
-                      uid=user,
-                      pwd=getPass::getPass(paste0("Enter Password for ", username, ": ")),
-                      TDS_version=tdsver)
+  if(trusted) {
+    #try microsoft integration
+    con <- DBI::dbConnect(odbc::odbc(),
+                 driver = "ODBC Driver 17 for SQL Server",
+                 server = server,
+                 database = dbname,
+                 Trusted_Connection="yes",
+                 port = 1433)
+  } else {
+    user = paste0("win\\",username)
+    con<-DBI::dbConnect(odbc::odbc(),
+                        port=port,
+                        driver=driver,
+                        server=server,
+                        database=dbname,
+                        uid=user,
+                        pwd=getPass::getPass(paste0("Enter Password for ", username, ": ")),
+                        TDS_version=tdsver)
+  }
 
   if(verbose) print(con)
   cat("Note: name/rename your connection as 'default_engine' to avoid\n",
