@@ -2,7 +2,7 @@
 
 #' Generate a dbConnect object to the SQL database
 #'
-#' This function generates a connection object. Note that most of the functions in pmap.utilities
+#' This function generates a connection object. Note that most of the functions in pmapUtilities
 #' package require the specification of connection engine in the `engine` parameter of the function.
 #' However, all functions in the package requiring a connection will look for `default_engine` in the
 #' global environment, thus it is convenient (and recommended) to assign the return value of this
@@ -93,7 +93,7 @@ query_db <- function(query, engine = default_engine) {
 #' return_table(table="encounters", max_rows=10000, filter="encounter_type='Appointment'", engine = myconnection)
 
 return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
-                         filter_condition = NULL, rnd_wrk_units=NULL,
+                         filter_condition = NULL,
                          engine = default_engine) {
 
   query = construct_table_query(schema = schema,

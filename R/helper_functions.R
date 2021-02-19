@@ -7,7 +7,7 @@ gen_random_temp_table_name <- function() {
 }
 
 #' Function provides a vector of available db names
-#' @keywords internal
+#' @export
 available_database_names <- function() {
   c('CAMP_PMCoE_Projection')
 }

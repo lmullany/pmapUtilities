@@ -6,21 +6,15 @@
 #' be helpful for users to execute an analytic pipeline on a random set of ids.
 #'
 #' @param size number of unique ids to return (default 1000)
-#' @param filter string expressed as a SQL where clause on MHAODS.WRKUNH. The clause must begin with
-#' "WHERE " Examples include:
+#' @param filter string expressed as a valid SQL where clause. The clause must
+#' begin with 'WHERE ' Examples include:
 #'
-#'  - "WHERE MHAODS.WRKUNH.PRC_LVL_CD='H'"
-#'
-#'  - "WHERE MHAODS.WRKUNH.PRC_LVL_CD='H' AND MHAODS.WRKUNH.CRNT_HRG_RQSTD_DT>='2017-01-01'"
-#'
-#'  - "WHERE PRC_LVL_CD='H' AND CRNT_HRG_RQSTD_DT>='2017-01-01'"
+#'  - "WHERE patients.race='Other'"
+#'  - "WHERE osler_id = '123456'"
 #'
 #'  The function will return the dbo.tempname of the temporary table (e.g.
 #'  "#dplyr_010"); if the results are desired that \code{tempname} can be used in
-#'  return_table (i.e. \code{return_table("dbo","#dplyr_010")}). Furthermore, function
-#'  \code{return_table()} has an argument \code{random_wrk_units} which can be set
-#'  to this \code{tempname} in order to limit the results of that query to this
-#'  random subset (See example below).
+#'  return_table (i.e. \code{return_table(table = "#dplyr_010",schema="dbo")}).
 #'
 #' @param table string table name to query
 #' @param idvars vector of string column names that define uniqueness on the table (i.e. the primary key)
@@ -51,8 +45,6 @@ gen_random_table <- function(table,
 
   #One option: if the filter is NULL, use the method below
   #get random numbers
-
-
 
   if(is.null(filter)) {
 

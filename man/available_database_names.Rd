@@ -9,4 +9,3 @@ available_database_names()
 \description{
 Function provides a vector of available db names
 }
-\keyword{internal}

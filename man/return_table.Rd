@@ -10,7 +10,6 @@ return_table(
   columns = NULL,
   max_rows = NULL,
   filter_condition = NULL,
-  rnd_wrk_units = NULL,
   engine = default_engine
 )
 }

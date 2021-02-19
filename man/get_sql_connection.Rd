@@ -34,7 +34,7 @@ ODBC Driver 17 for SQL SERVER and Trusted_Connection="yes"}
 Database connection object as returned by \code{DBI::dbConnect()}
 }
 \description{
-This function generates a connection object. Note that most of the functions in pmap.utilities
+This function generates a connection object. Note that most of the functions in pmapUtilities
 package require the specification of connection engine in the \code{engine} parameter of the function.
 However, all functions in the package requiring a connection will look for \code{default_engine} in the
 global environment, thus it is convenient (and recommended) to assign the return value of this
