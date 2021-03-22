@@ -9,5 +9,6 @@ gen_random_temp_table_name <- function() {
 #' Function provides a vector of available db names
 #' @export
 available_database_names <- function() {
-  c('CAMP_PMCoE_Projection')
+  c('CAMP_PMCoE_Projection',
+    'PatientSafetyQualityWSP_Projection')
 }
