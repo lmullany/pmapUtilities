@@ -6,9 +6,23 @@ gen_random_temp_table_name <- function() {
   paste0("#",paste(sample(c(letters,0:9),16, replace=T), collapse=""))
 }
 
-#' Function provides a vector of available db names
+#' Function provides a named list of available db names
+#'
+#' Without providing name `n`, this function will return
+#' a named list of data base projections available. Provide
+#' argument `n` to return just the full name of the specific
+#' projection
+#' @param n nickname of the projection to return
 #' @export
-available_database_names <- function() {
-  c('CAMP_PMCoE_Projection',
-    'PatientSafetyQualityWSP_Projection')
+pmap_dbs <- function(n=NULL) {
+
+  available = list(
+    "camp" = 'CAMP_PMCoE_Projection',
+    "wsp" =  'PatientSafetyQualityWSP_Projection'
+    )
+
+  if(!is.null(n)) return(available[[n]])
+  else return(available)
+
+
 }
