@@ -96,6 +96,9 @@ return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
                          filter_condition = NULL,
                          engine = default_engine) {
 
+  if(!is.null(columns)) {
+    columns = paste0("[",columns,"]")
+  }
   query = construct_table_query(schema = schema,
                                 table=table,
                                 columns = columns,
