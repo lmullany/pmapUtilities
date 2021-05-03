@@ -51,8 +51,8 @@ get_sql_connection <- function(dbname,
   }
 
   if(verbose) print(con)
-  cat("Note: name/rename your connection as 'default_engine' to avoid\n",
-      "specifying an engine in subsequent pmap.utilities:: functions\n")
+  #cat("Note: name/rename your connection as 'default_engine' to avoid\n",
+  #    "specifying an engine in subsequent pmap.utilities:: functions\n")
   return(invisible(con))
 }
 

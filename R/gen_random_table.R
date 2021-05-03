@@ -63,12 +63,13 @@ gen_random_table <- function(table,
                  "INNER JOIN [",random_indices_name$tempname,"] AS T ON T.ID=S.ID")
   } else {
     # 1. create a temp table of the filtered table,
+    filtered_tt = gen_random_temp_table_name()
     qry = paste0("select ",unaliased_idvars,",ROW_NUMBER() OVER(ORDER by ",unaliased_idvars,") AS ID ",
-                 "INTO ", random_table_name, " ",
+                 "INTO ", filtered_tt, " ",
                  "FROM ",schema,".",table, " ",filter)
 
     # before creating, drop if exists temp table
-    tryCatch(DBI::dbRemoveTable(conn=engine,random_table_name),
+    tryCatch(DBI::dbRemoveTable(conn=engine,filtered_tt),
              error=function(e) {},
              warning=function(w) {})
 
@@ -82,8 +83,8 @@ gen_random_table <- function(table,
                        seed = seed,engine=engine)
       )
 
-    # 4. Create the query to select from #subwrk only these indices
-    qry= paste0("SELECT ",aliased_idvars," FROM ",random_table_name," AS S ",
+    # 4. Create the query to select from #filtered_tt only these indices
+    qry= paste0("SELECT ",aliased_idvars," FROM ",filtered_tt," AS S ",
                 "INNER JOIN ",random_indices_name$tempname," AS T ON T.ID=S.ID")
 
   }

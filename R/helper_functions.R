@@ -3,6 +3,7 @@
 #' Function provides a random temp table name
 #' @keywords internal
 gen_random_temp_table_name <- function() {
+  set.seed(NULL)
   paste0("#",paste(sample(c(letters,0:9),16, replace=T), collapse=""))
 }
 
