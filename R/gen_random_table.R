@@ -37,6 +37,10 @@ gen_random_table <- function(table,
                                       seed=NULL,
                                       engine=default_engine) {
 
+  if(!table %in% list_tables(engine=engine)$table) {
+    stop("table not found, check list_tables()",call. = F)
+  }
+
   aliased_idvars = paste(paste0("S.",idvars), collapse=",")
   unaliased_idvars = paste(idvars,collapse=",")
 
@@ -48,7 +52,7 @@ gen_random_table <- function(table,
 
   if(is.null(filter)) {
 
-    maxlength <- get_table_dim(table = table, schema = schema, exact = TRUE,engine=engine)[1]
+    maxlength <- get_table_dim(table = table, schema = schema, exact = TRUE, engine=engine)[1]
 
     #gen random indices table and save name
     random_indices_name <- suppressMessages(
@@ -90,11 +94,12 @@ gen_random_table <- function(table,
   }
 
 
-  tname <- suppressMessages(
+  suppressMessages(
     dplyr::compute(
       query_db(query = qry, engine=engine),
       name=random_table_name
-      )[[2]]$x)
+      )
+  )
 
   #Now, issue a warning if random_indices is less than requested
   if(random_indices_name$tempsize<size) {
@@ -102,7 +107,7 @@ gen_random_table <- function(table,
             call.=F)
   }
 
-  return(tname)
+  return(random_table_name)
 
 }
 
@@ -148,6 +153,6 @@ gen_temp_indices <- function(size=1000, max_index, seed=NULL, engine=default_eng
     indexes=list("id"))
 
   #return the temp table name back to calling function, and the size
-  return(list(tempname = as.character(temp_rnd_indices$ops$x),tempsize=ret_size))
+  return(list(tempname = indices_table_name,tempsize=ret_size))
 }
 
