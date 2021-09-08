@@ -1,6 +1,6 @@
 Package: pmapUtilities
 Title: API to PMAP Projections
-Version: 1.0.0.0002
+Version: 1.0.0.0003
 Authors@R:
     person(given = "Luke",
            family = "Mullany",
@@ -18,5 +18,6 @@ Imports:
     odbc,
     magrittr,
     data.table,
-    getPass
+    getPass,
+    rlang
 License: MIT + file LICENSE

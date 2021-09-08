@@ -96,16 +96,28 @@ return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
                          filter_condition = NULL,
                          engine = default_engine) {
 
-  if(!is.null(columns)) {
-    columns = paste0("[",columns,"]")
+  src_tbl <- dplyr::tbl(
+    src = default_engine,
+    dbplyr::in_schema(
+      dplyr::sql(schema),
+      dplyr::sql(table)
+    )
+  )
+
+  if(!is.null(filter_condition)) {
+    src_tbl <- src_tbl %>%
+      dplyr::filter(!! rlang::parse_expr(filter_condition))
   }
-  query = construct_table_query(schema = schema,
-                                table=table,
-                                columns = columns,
-                                max_rows = max_rows,
-                                filter_condition = filter_condition)
-  df = query_db(query,engine)
-  return(df)
+
+  if(!is.null(columns)) {
+    src_tbl <- src_tbl %>%
+      dplyr::select(all_of(columns))
+  }
+
+  if(!is.null(max_rows)) {
+    src_tbl <- src_tbl %>% head(max_rows)
+  }
+  return(src_tbl)
 }
 
 #' Construct a query, given schema, table, columns, filter condition
@@ -122,6 +134,8 @@ return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
 #' construct_table_query(myschema, mytable, col_list, 1000, my_filter)
 construct_table_query <- function(schema="dbo", table, columns=NULL, max_rows=NULL,filter_condition=NULL) {
   max_row_spec = ifelse(is.null(max_rows),"",paste0("TOP ",as.integer(max_rows)))
+
+  src_table = dplyr::tbl(src = )
 
   if(is.null(columns)) {
     query = sprintf("SELECT %s * FROM [%s].[%s] ", max_row_spec, schema, table)
