@@ -19,7 +19,8 @@ pmap_dbs <- function(n=NULL) {
 
   available = list(
     "camp" = 'CAMP_PMCoE_Projection',
-    "wsp" =  'PatientSafetyQualityWSP_Projection'
+    "wsp" =  'PatientSafetyQualityWSP_Projection',
+    "vte" =  'PatientSafetyQualityVTE_Projection'
     )
 
   if(!is.null(n)) return(available[[n]])

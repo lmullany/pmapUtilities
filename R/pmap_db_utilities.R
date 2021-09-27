@@ -97,7 +97,7 @@ return_table <- function(table,schema="dbo",columns = NULL, max_rows=NULL,
                          engine = default_engine) {
 
   src_tbl <- dplyr::tbl(
-    src = default_engine,
+    src = engine,
     dbplyr::in_schema(
       dplyr::sql(schema),
       dplyr::sql(table)
