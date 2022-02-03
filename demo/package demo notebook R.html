@@ -14243,20 +14243,19 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This notebook is provided as basic demonstration of use of the pmap.utilities R package, developed by Luke C. Mullany, PhD MS MHS, and available at <a href="https://github.com/lmullany/pmap_utilities.git">https://github.com/lmullany/pmap_utilities.git</a> and can be installed using <code>devtools::install_github("lmullany/pmap_utilities")</code></p>
+<p>This notebook is provided as basic demonstration of use of the pmapUtilities R package, developed by Luke C. Mullany, PhD MS MHS, and available at <a href="https://github.com/lmullany/pmapUtilities.git">https://github.com/lmullany/pmapUtilities.git</a> and can be installed using <code>devtools::install_github("lmullany/pmapUtilities")</code></p>
 <ul>
 <li><strong>Platform Tool</strong> : Jupyter/RStudio Crunchr Compute Containers</li>
 <li><strong>Programming Language</strong>: R (&gt;=3.6)</li>
 <li><strong>Author(s)</strong> : Luke C. Mullany</li>
-<li><strong>License</strong> : The notebook is release under the [Apache 2.0 License] (<a href="https://www.apache.org/licenses/LICENSE-2.0">https://www.apache.org/licenses/LICENSE-2.0</a>)</li>
-<li><strong>Last Updated</strong> : January 6th, 2021</li>
+<li><strong>Last Updated</strong> : February 3rd, 2022</li>
 </ul>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Basic-use-of-pmap.utilities-R-package">Basic use of pmap.utilities R package<a class="anchor-link" href="#Basic-use-of-pmap.utilities-R-package">&#182;</a></h2>
+<h2 id="Basic-use-of-pmapUtilities-R-package">Basic use of pmapUtilities R package<a class="anchor-link" href="#Basic-use-of-pmapUtilities-R-package">&#182;</a></h2>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14270,7 +14269,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="o">=</span><span class="nf">ls</span><span class="p">())</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">pmap.utilities</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">pmapUtilities</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14311,19 +14310,6 @@ a.anchor-link {
 
 </div>
 
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Note: name/rename your connection as &#39;default_engine&#39; to avoid
- specifying an engine in subsequent pmap.utilities:: functions
-</pre>
-</div>
-</div>
-
 </div>
 
 </div>
@@ -14336,10 +14322,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">list_tables</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">list_tables</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14358,24 +14344,35 @@ a.anchor-link {
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>                 table
- 1:           patients
- 2:         encounters
- 3:               labs
- 4:               meds
- 5:        problemlist
- 6:         procedures
- 7:           symptoms
- 8:          vitals_BP
- 9:      vitals_height
-10:       vitals_pulse
-11: vitals_respiration
-12: vitals_temperature
-13:      vitals_weight
-14:        sysdiagrams
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table>
+<caption>A data.table: 15 x 1</caption>
+<thead>
+	<tr><th scope=col>table</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>patients          </td></tr>
+	<tr><td>encounters        </td></tr>
+	<tr><td>labs              </td></tr>
+	<tr><td>meds              </td></tr>
+	<tr><td>problemlist       </td></tr>
+	<tr><td>procedures        </td></tr>
+	<tr><td>symptoms          </td></tr>
+	<tr><td>vitals_BP         </td></tr>
+	<tr><td>vitals_height     </td></tr>
+	<tr><td>vitals_pulse      </td></tr>
+	<tr><td>vitals_respiration</td></tr>
+	<tr><td>vitals_temperature</td></tr>
+	<tr><td>vitals_weight     </td></tr>
+	<tr><td>sysdiagrams       </td></tr>
+	<tr><td>projection_status </td></tr>
+</tbody>
+</table>
+
 </div>
+
 </div>
 
 </div>
@@ -14390,10 +14387,10 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">list_tables</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">,</span><span class="n">show_dimensions</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="bp">T</span><span class="p">))</span>
+<div class=" highlight hl-r"><pre><span></span><span class="nf">list_tables</span><span class="p">(</span><span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">,</span><span class="n">show_dimensions</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14412,24 +14409,35 @@ a.anchor-link {
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>                 table    rows cols
- 1:           patients   60676    5
- 2:         encounters  753484    4
- 3:               labs 3509868   12
- 4:               meds  631022   10
- 5:        problemlist  781379    4
- 6:         procedures 5550672    6
- 7:           symptoms 1967436    5
- 8:          vitals_BP 1061684    7
- 9:      vitals_height  305612    7
-10:       vitals_pulse 1227099    7
-11: vitals_respiration  957677    7
-12: vitals_temperature  805345    7
-13:      vitals_weight  406052    7
-14:        sysdiagrams       0    5
-</pre>
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table>
+<caption>A data.table: 15 x 3</caption>
+<thead>
+	<tr><th scope=col>table</th><th scope=col>rows</th><th scope=col>cols</th></tr>
+	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><td>patients          </td><td>  60676</td><td> 5</td></tr>
+	<tr><td>encounters        </td><td> 753484</td><td> 4</td></tr>
+	<tr><td>labs              </td><td>3509868</td><td>12</td></tr>
+	<tr><td>meds              </td><td> 631022</td><td>10</td></tr>
+	<tr><td>problemlist       </td><td> 781379</td><td> 4</td></tr>
+	<tr><td>procedures        </td><td>5550672</td><td> 6</td></tr>
+	<tr><td>symptoms          </td><td>1967436</td><td> 5</td></tr>
+	<tr><td>vitals_BP         </td><td>1061684</td><td> 7</td></tr>
+	<tr><td>vitals_height     </td><td> 305612</td><td> 7</td></tr>
+	<tr><td>vitals_pulse      </td><td>1227099</td><td> 7</td></tr>
+	<tr><td>vitals_respiration</td><td> 957677</td><td> 7</td></tr>
+	<tr><td>vitals_temperature</td><td> 805345</td><td> 7</td></tr>
+	<tr><td>vitals_weight     </td><td> 406052</td><td> 7</td></tr>
+	<tr><td>sysdiagrams       </td><td>      0</td><td> 5</td></tr>
+	<tr><td>projection_status </td><td>      0</td><td> 9</td></tr>
+</tbody>
+</table>
+
 </div>
+
 </div>
 
 </div>
@@ -14444,7 +14452,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">list_columns</span><span class="p">(</span><span class="s">&quot;encounters&quot;</span><span class="p">,</span><span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">))</span>
@@ -14484,7 +14492,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">dims</span> <span class="o">=</span> <span class="nf">get_table_dim</span><span class="p">(</span><span class="s">&quot;encounters&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">,</span> <span class="n">exact</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
@@ -14521,13 +14529,13 @@ a.anchor-link {
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Return-a-lazy-handle-to-the-table">Return a lazy handle to the table<a class="anchor-link" href="#Return-a-lazy-handle-to-the-table">&#182;</a></h4><p>Note that this feature is using dplyr/dbplyr under the hood, which enables us to translate dplyr verbs into SQL and execute on the table without pull all rows from the table</p>
+<h4 id="Return-a-lazy-handle-to-the-table">Return a lazy handle to the table<a class="anchor-link" href="#Return-a-lazy-handle-to-the-table">&#182;</a></h4><p>Note that this feature is using dplyr/dbplyr under the hood, which enables us to translate dplyr verbs into SQL and execute on the table without pulling all rows from the table</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">encounters</span> <span class="o">=</span> <span class="nf">return_table</span><span class="p">(</span><span class="s">&quot;encounters&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">)</span>
@@ -14553,21 +14561,21 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre><span style="color: rgb(148,148,148)"># Source:   SQL [?? x 4]</span>
-<span style="color: rgb(148,148,148)"># Database: Microsoft SQL Server 13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
-   osler_id                      encounter_id encounter_type encounter_date     
-   <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>                                <span style="color: rgb(148,148,148)">&lt;int&gt;</span> <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>          <span style="color: rgb(148,148,148)">&lt;dttm&gt;</span>             
-<span style="color: rgb(188,188,188)"> 1</span> 5303550b-8ed2-42fd-885a-d32b~        <span class="ansi-underline">1</span><span class="ansi-underline">7</span>938 Office Visit   2015-10-10 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 2</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">1</span><span class="ansi-underline">4</span><span class="ansi-underline">2</span>706 Office Visit   2016-01-24 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 3</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">5</span><span class="ansi-underline">7</span><span class="ansi-underline">1</span>465 Office Visit   2017-03-19 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 4</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">2</span>470 Office Visit   2016-10-22 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 5</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">0</span>795 Office Visit   2016-10-01 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 6</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">6</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>974 Office Visit   2017-05-08 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 7</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">8</span><span class="ansi-underline">3</span>944 Office Visit   2016-12-10 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 8</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">1</span>794 Office Visit   2016-10-03 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 9</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">3</span><span class="ansi-underline">2</span><span class="ansi-underline">4</span>374 Office Visit   2016-07-11 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)">10</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">7</span><span class="ansi-underline">0</span><span class="ansi-underline">5</span>948 Office Visit   2017-07-19 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(148,148,148)"># ... with more rows</span></pre>
+<pre><span class="ansi-black-intense-fg"># Source:   table&lt;dbo.encounters&gt; [?? x 4]</span>
+<span class="ansi-black-intense-fg"># Database: Microsoft SQL Server 13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
+   osler_id                             encounter_id encounter_type encounter_date     
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>                                       <span class="ansi-black-intense-fg">&lt;int&gt;</span> <span class="ansi-black-intense-fg">&lt;chr&gt;</span>          <span class="ansi-black-intense-fg">&lt;dttm&gt;</span>             
+<span class="ansi-black-intense-fg"> 1</span> 5303550b-8ed2-42fd-885a-d32b308b05f3        <span class="ansi-underline">1</span><span class="ansi-underline">7</span>938 Office Visit   2015-10-10 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 2</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">1</span><span class="ansi-underline">4</span><span class="ansi-underline">2</span>706 Office Visit   2016-01-24 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 3</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">5</span><span class="ansi-underline">7</span><span class="ansi-underline">1</span>465 Office Visit   2017-03-19 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 4</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">2</span>470 Office Visit   2016-10-22 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 5</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">0</span>795 Office Visit   2016-10-01 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 6</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">6</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>974 Office Visit   2017-05-08 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 7</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">8</span><span class="ansi-underline">3</span>944 Office Visit   2016-12-10 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 8</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">1</span>794 Office Visit   2016-10-03 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 9</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">3</span><span class="ansi-underline">2</span><span class="ansi-underline">4</span>374 Office Visit   2016-07-11 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg">10</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">7</span><span class="ansi-underline">0</span><span class="ansi-underline">5</span>948 Office Visit   2017-07-19 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"># ... with more rows</span></pre>
 </div>
 
 </div>
@@ -14585,7 +14593,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">encounters</span> <span class="o">%&gt;%</span> <span class="n">dplyr</span><span class="o">::</span><span class="nf">group_by</span><span class="p">(</span><span class="n">encounter_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="n">dplyr</span><span class="o">::</span><span class="nf">summarize</span><span class="p">(</span><span class="n">ct</span> <span class="o">=</span> <span class="nf">n</span><span class="p">())</span> <span class="o">%&gt;%</span> <span class="n">dplyr</span><span class="o">::</span><span class="nf">arrange</span><span class="p">(</span><span class="nf">desc</span><span class="p">(</span><span class="n">ct</span><span class="p">))</span>
@@ -14610,23 +14618,23 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre><span style="color: rgb(148,148,148)"># Source:     lazy query [?? x 2]</span>
-<span style="color: rgb(148,148,148)"># Database:   Microsoft SQL Server
+<pre><span class="ansi-black-intense-fg"># Source:     lazy query [?? x 2]</span>
+<span class="ansi-black-intense-fg"># Database:   Microsoft SQL Server
 #   13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
-<span style="color: rgb(148,148,148)"># Ordered by: desc(ct)</span>
+<span class="ansi-black-intense-fg"># Ordered by: desc(ct)</span>
    encounter_type         ct
-   <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>               <span style="color: rgb(148,148,148)">&lt;int&gt;</span>
-<span style="color: rgb(188,188,188)"> 1</span> Office Visit       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>080
-<span style="color: rgb(188,188,188)"> 2</span> Appointment         <span class="ansi-underline">9</span><span class="ansi-underline">7</span>718
-<span style="color: rgb(188,188,188)"> 3</span> Hospital Encounter  <span class="ansi-underline">8</span><span class="ansi-underline">6</span>789
-<span style="color: rgb(188,188,188)"> 4</span> Visit Encounter     <span class="ansi-underline">6</span><span class="ansi-underline">2</span>740
-<span style="color: rgb(188,188,188)"> 5</span> Clinical Support    <span class="ansi-underline">2</span><span class="ansi-underline">1</span>626
-<span style="color: rgb(188,188,188)"> 6</span> Procedure visit     <span class="ansi-underline">1</span><span class="ansi-underline">8</span>256
-<span style="color: rgb(188,188,188)"> 7</span> Results Only         <span class="ansi-underline">8</span>895
-<span style="color: rgb(188,188,188)"> 8</span> Orders Only          <span class="ansi-underline">8</span>635
-<span style="color: rgb(188,188,188)"> 9</span> Anti-coag visit      <span class="ansi-underline">7</span>284
-<span style="color: rgb(188,188,188)">10</span> Provider Procedure   <span class="ansi-underline">2</span>987
-<span style="color: rgb(148,148,148)"># ... with more rows</span></pre>
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>               <span class="ansi-black-intense-fg">&lt;int&gt;</span>
+<span class="ansi-black-intense-fg"> 1</span> Office Visit       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>080
+<span class="ansi-black-intense-fg"> 2</span> Appointment         <span class="ansi-underline">9</span><span class="ansi-underline">7</span>718
+<span class="ansi-black-intense-fg"> 3</span> Hospital Encounter  <span class="ansi-underline">8</span><span class="ansi-underline">6</span>789
+<span class="ansi-black-intense-fg"> 4</span> Visit Encounter     <span class="ansi-underline">6</span><span class="ansi-underline">2</span>740
+<span class="ansi-black-intense-fg"> 5</span> Clinical Support    <span class="ansi-underline">2</span><span class="ansi-underline">1</span>626
+<span class="ansi-black-intense-fg"> 6</span> Procedure visit     <span class="ansi-underline">1</span><span class="ansi-underline">8</span>256
+<span class="ansi-black-intense-fg"> 7</span> Results Only         <span class="ansi-underline">8</span>895
+<span class="ansi-black-intense-fg"> 8</span> Orders Only          <span class="ansi-underline">8</span>635
+<span class="ansi-black-intense-fg"> 9</span> Anti-coag visit      <span class="ansi-underline">7</span>284
+<span class="ansi-black-intense-fg">10</span> Provider Procedure   <span class="ansi-underline">2</span>987
+<span class="ansi-black-intense-fg"># ... with more rows</span></pre>
 </div>
 
 </div>
@@ -14644,7 +14652,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">encounters_local</span> <span class="o">=</span> <span class="n">encounters</span> <span class="o">%&gt;%</span> <span class="n">dplyr</span><span class="o">::</span><span class="nf">collect</span><span class="p">()</span>
@@ -14668,19 +14676,19 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre><span style="color: rgb(148,148,148)"># A tibble: 10 x 4</span>
-   osler_id                      encounter_id encounter_type encounter_date     
-   <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>                                <span style="color: rgb(148,148,148)">&lt;int&gt;</span> <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>          <span style="color: rgb(148,148,148)">&lt;dttm&gt;</span>             
-<span style="color: rgb(188,188,188)"> 1</span> 5303550b-8ed2-42fd-885a-d32b~        <span class="ansi-underline">1</span><span class="ansi-underline">7</span>938 Office Visit   2015-10-10 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 2</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">1</span><span class="ansi-underline">4</span><span class="ansi-underline">2</span>706 Office Visit   2016-01-24 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 3</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">5</span><span class="ansi-underline">7</span><span class="ansi-underline">1</span>465 Office Visit   2017-03-19 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 4</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">2</span>470 Office Visit   2016-10-22 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 5</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">0</span>795 Office Visit   2016-10-01 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 6</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">6</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>974 Office Visit   2017-05-08 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 7</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">8</span><span class="ansi-underline">3</span>944 Office Visit   2016-12-10 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 8</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">1</span>794 Office Visit   2016-10-03 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)"> 9</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">3</span><span class="ansi-underline">2</span><span class="ansi-underline">4</span>374 Office Visit   2016-07-11 <span style="color: rgb(148,148,148)">00:00:00</span>
-<span style="color: rgb(188,188,188)">10</span> 5303550b-8ed2-42fd-885a-d32b~       <span class="ansi-underline">7</span><span class="ansi-underline">0</span><span class="ansi-underline">5</span>948 Office Visit   2017-07-19 <span style="color: rgb(148,148,148)">00:00:00</span>
+<pre><span class="ansi-black-intense-fg"># A tibble: 10 x 4</span>
+   osler_id                             encounter_id encounter_type encounter_date     
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>                                       <span class="ansi-black-intense-fg">&lt;int&gt;</span> <span class="ansi-black-intense-fg">&lt;chr&gt;</span>          <span class="ansi-black-intense-fg">&lt;dttm&gt;</span>             
+<span class="ansi-black-intense-fg"> 1</span> 5303550b-8ed2-42fd-885a-d32b308b05f3        <span class="ansi-underline">1</span><span class="ansi-underline">7</span>938 Office Visit   2015-10-10 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 2</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">1</span><span class="ansi-underline">4</span><span class="ansi-underline">2</span>706 Office Visit   2016-01-24 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 3</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">5</span><span class="ansi-underline">7</span><span class="ansi-underline">1</span>465 Office Visit   2017-03-19 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 4</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">2</span>470 Office Visit   2016-10-22 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 5</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">0</span>795 Office Visit   2016-10-01 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 6</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">6</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>974 Office Visit   2017-05-08 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 7</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">8</span><span class="ansi-underline">3</span>944 Office Visit   2016-12-10 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 8</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">4</span><span class="ansi-underline">1</span><span class="ansi-underline">1</span>794 Office Visit   2016-10-03 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg"> 9</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">3</span><span class="ansi-underline">2</span><span class="ansi-underline">4</span>374 Office Visit   2016-07-11 <span class="ansi-black-intense-fg">00:00:00</span>
+<span class="ansi-black-intense-fg">10</span> 5303550b-8ed2-42fd-885a-d32b308b05f3       <span class="ansi-underline">7</span><span class="ansi-underline">0</span><span class="ansi-underline">5</span>948 Office Visit   2017-07-19 <span class="ansi-black-intense-fg">00:00:00</span>
 </pre>
 </div>
 </div>
@@ -14697,7 +14705,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-r"><pre><span></span><span class="n">qry</span> <span class="o">&lt;-</span> <span class="s">&quot;SELECT encounter_type, ct = COUNT(*) FROM encounters GROUP BY encounter_type&quot;</span>
@@ -14723,29 +14731,197 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre><span style="color: rgb(148,148,148)"># Source:     SQL [?? x 2]</span>
-<span style="color: rgb(148,148,148)"># Database:   Microsoft SQL Server
+<pre><span class="ansi-black-intense-fg"># Source:     SQL [?? x 2]</span>
+<span class="ansi-black-intense-fg"># Database:   Microsoft SQL Server
 #   13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
-<span style="color: rgb(148,148,148)"># Ordered by: desc(ct)</span>
+<span class="ansi-black-intense-fg"># Ordered by: desc(ct)</span>
    encounter_type         ct
-   <span style="color: rgb(148,148,148)">&lt;chr&gt;</span>               <span style="color: rgb(148,148,148)">&lt;int&gt;</span>
-<span style="color: rgb(188,188,188)"> 1</span> Office Visit       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>080
-<span style="color: rgb(188,188,188)"> 2</span> Appointment         <span class="ansi-underline">9</span><span class="ansi-underline">7</span>718
-<span style="color: rgb(188,188,188)"> 3</span> Hospital Encounter  <span class="ansi-underline">8</span><span class="ansi-underline">6</span>789
-<span style="color: rgb(188,188,188)"> 4</span> Visit Encounter     <span class="ansi-underline">6</span><span class="ansi-underline">2</span>740
-<span style="color: rgb(188,188,188)"> 5</span> Clinical Support    <span class="ansi-underline">2</span><span class="ansi-underline">1</span>626
-<span style="color: rgb(188,188,188)"> 6</span> Procedure visit     <span class="ansi-underline">1</span><span class="ansi-underline">8</span>256
-<span style="color: rgb(188,188,188)"> 7</span> Results Only         <span class="ansi-underline">8</span>895
-<span style="color: rgb(188,188,188)"> 8</span> Orders Only          <span class="ansi-underline">8</span>635
-<span style="color: rgb(188,188,188)"> 9</span> Anti-coag visit      <span class="ansi-underline">7</span>284
-<span style="color: rgb(188,188,188)">10</span> Provider Procedure   <span class="ansi-underline">2</span>987
-<span style="color: rgb(148,148,148)"># ... with more rows</span></pre>
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>               <span class="ansi-black-intense-fg">&lt;int&gt;</span>
+<span class="ansi-black-intense-fg"> 1</span> Office Visit       <span class="ansi-underline">4</span><span class="ansi-underline">3</span><span class="ansi-underline">1</span>080
+<span class="ansi-black-intense-fg"> 2</span> Appointment         <span class="ansi-underline">9</span><span class="ansi-underline">7</span>718
+<span class="ansi-black-intense-fg"> 3</span> Hospital Encounter  <span class="ansi-underline">8</span><span class="ansi-underline">6</span>789
+<span class="ansi-black-intense-fg"> 4</span> Visit Encounter     <span class="ansi-underline">6</span><span class="ansi-underline">2</span>740
+<span class="ansi-black-intense-fg"> 5</span> Clinical Support    <span class="ansi-underline">2</span><span class="ansi-underline">1</span>626
+<span class="ansi-black-intense-fg"> 6</span> Procedure visit     <span class="ansi-underline">1</span><span class="ansi-underline">8</span>256
+<span class="ansi-black-intense-fg"> 7</span> Results Only         <span class="ansi-underline">8</span>895
+<span class="ansi-black-intense-fg"> 8</span> Orders Only          <span class="ansi-underline">8</span>635
+<span class="ansi-black-intense-fg"> 9</span> Anti-coag visit      <span class="ansi-underline">7</span>284
+<span class="ansi-black-intense-fg">10</span> Provider Procedure   <span class="ansi-underline">2</span>987
+<span class="ansi-black-intense-fg"># ... with more rows</span></pre>
 </div>
 
 </div>
 
 </div>
 
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Use-gen_random_table()-to-get-subset-of-the-identifying-variables-for-a-table;-the-function-creates-a-table-on-the-db,-and-returns-the-name-of-that-temp-table">Use gen_random_table() to get subset of the identifying variables for a table; the function creates a table on the db, and returns the name of that temp table<a class="anchor-link" href="#Use-gen_random_table()-to-get-subset-of-the-identifying-variables-for-a-table;-the-function-creates-a-table-on-the-db,-and-returns-the-name-of-that-temp-table">&#182;</a></h4>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="n">random_px</span> <span class="o">=</span> <span class="nf">gen_random_table</span><span class="p">(</span><span class="s">&quot;patients&quot;</span><span class="p">,</span><span class="n">idvars</span><span class="o">=</span><span class="s">&quot;osler_id&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Name of the newly created table is &quot;</span><span class="p">,</span> <span class="n">random_px</span><span class="p">,</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Name of the newly created table is  #xy2hn0ct0ib12uql 
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="You-can-feed-this-table-name,-just-like-any-other-table-name,-to-the-return_table()-function">You can feed this table name, just like any other table name, to the <code>return_table()</code> function<a class="anchor-link" href="#You-can-feed-this-table-name,-just-like-any-other-table-name,-to-the-return_table()-function">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="nf">return_table</span><span class="p">(</span><span class="n">random_px</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre><span class="ansi-black-intense-fg"># Source:   table&lt;dbo.#xy2hn0ct0ib12uql&gt; [?? x 1]</span>
+<span class="ansi-black-intense-fg"># Database: Microsoft SQL Server 13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
+   osler_id                            
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>                               
+<span class="ansi-black-intense-fg"> 1</span> 02afae4b-a5fa-4778-8343-8389f1ac4ec7
+<span class="ansi-black-intense-fg"> 2</span> 0a14c83e-09d2-4476-b9af-b48d61742ca7
+<span class="ansi-black-intense-fg"> 3</span> 1ce9f3ea-04fa-4966-a491-e8e9e4a09135
+<span class="ansi-black-intense-fg"> 4</span> 1de9c4cb-5f0c-4fde-95ca-20d2396d384a
+<span class="ansi-black-intense-fg"> 5</span> 1e28bd3c-b545-40e3-9402-2416a41052aa
+<span class="ansi-black-intense-fg"> 6</span> 25e3e1ba-4fa1-4445-9c08-f266de3cd2fa
+<span class="ansi-black-intense-fg"> 7</span> 27ee4b8e-f933-49bc-b073-c685edeafebf
+<span class="ansi-black-intense-fg"> 8</span> 37c7cdaf-39af-457d-bf61-213d5f058fb2
+<span class="ansi-black-intense-fg"> 9</span> 3c4ea706-dff9-482c-8fa6-86f63ef97c23
+<span class="ansi-black-intense-fg">10</span> 3f307ad8-00c3-40c5-92c5-5958bdcccd86
+<span class="ansi-black-intense-fg"># ... with more rows</span></pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="This-table-of-random-ids-could-be-used-in-simple-joins,-for-example,-below-we-get-all-the-rows-from-the-vitals_weight-table-for-the-osler-ids-in-the-random_px-table.">This table of random ids could be used in simple joins, for example, below we get all the rows from the <code>vitals_weight</code> table for the osler ids in the <code>random_px</code> table.<a class="anchor-link" href="#This-table-of-random-ids-could-be-used-in-simple-joins,-for-example,-below-we-get-all-the-rows-from-the-vitals_weight-table-for-the-osler-ids-in-the-random_px-table.">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span><span class="nf">return_table</span><span class="p">(</span><span class="s">&quot;vitals_weight&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+    <span class="n">dplyr</span><span class="o">::</span><span class="nf">inner_join</span><span class="p">(</span><span class="nf">return_table</span><span class="p">(</span><span class="n">random_px</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="n">de</span><span class="p">),</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;osler_id&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre><span class="ansi-black-intense-fg"># Source:   lazy query [?? x 7]</span>
+<span class="ansi-black-intense-fg"># Database: Microsoft SQL Server 13.00.5830[@ESMPMDBPR4/CAMP_PMCoE_Projection]</span>
+   osler_id  encounter_id encounter_type admission_date      discharge_date     
+   <span class="ansi-black-intense-fg">&lt;chr&gt;</span>            <span class="ansi-black-intense-fg">&lt;int&gt;</span> <span class="ansi-black-intense-fg">&lt;chr&gt;</span>          <span class="ansi-black-intense-fg">&lt;dttm&gt;</span>              <span class="ansi-black-intense-fg">&lt;dttm&gt;</span>             
+<span class="ansi-black-intense-fg"> 1</span> cf58694f~        <span class="ansi-underline">6</span><span class="ansi-underline">7</span>757 Procedure vis~ 2015-11-25 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 2</span> cf58694f~       <span class="ansi-underline">4</span><span class="ansi-underline">9</span><span class="ansi-underline">2</span>534 Hospital Enco~ 2017-01-01 <span class="ansi-black-intense-fg">16:29:00</span> 2017-01-01 <span class="ansi-black-intense-fg">19:22:00</span>
+<span class="ansi-black-intense-fg"> 3</span> cf58694f~       <span class="ansi-underline">2</span><span class="ansi-underline">2</span><span class="ansi-underline">6</span>981 Office Visit   2016-05-07 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 4</span> cf58694f~       <span class="ansi-underline">2</span><span class="ansi-underline">1</span><span class="ansi-underline">6</span>138 Office Visit   2016-04-23 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 5</span> 9222570a~       <span class="ansi-underline">6</span><span class="ansi-underline">1</span><span class="ansi-underline">5</span>031 Office Visit   2017-05-30 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 6</span> 9222570a~       <span class="ansi-underline">6</span><span class="ansi-underline">7</span><span class="ansi-underline">6</span>523 Office Visit   2017-07-02 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 7</span> 9222570a~       <span class="ansi-underline">6</span><span class="ansi-underline">0</span><span class="ansi-underline">2</span>795 Office Visit   2017-04-20 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 8</span> 9222570a~       <span class="ansi-underline">7</span><span class="ansi-underline">4</span><span class="ansi-underline">0</span>755 Office Visit   2017-09-12 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"> 9</span> 9222570a~       <span class="ansi-underline">4</span><span class="ansi-underline">2</span><span class="ansi-underline">2</span>121 Office Visit   2016-10-26 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg">10</span> 9222570a~       <span class="ansi-underline">1</span><span class="ansi-underline">4</span><span class="ansi-underline">3</span>790 Office Visit   2016-05-01 <span class="ansi-black-intense-fg">00:00:00</span> <span class="ansi-red-fg">NA</span>                 
+<span class="ansi-black-intense-fg"># ... with more rows, and 2 more variables: weight &lt;chr&gt;, weight_date &lt;dttm&gt;</span></pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-r"><pre><span></span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
