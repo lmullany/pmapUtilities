@@ -17,10 +17,15 @@ gen_random_temp_table_name <- function() {
 #' @export
 pmap_dbs <- function(n=NULL) {
 
+  if(!is.null(n)) {
+    n = tolower(n)
+  }
+
   available = list(
     "camp" = 'CAMP_PMCoE_Projection',
     "wsp" =  'PatientSafetyQualityWSP_Projection',
-    "vte" =  'PatientSafetyQualityVTE_Projection'
+    "vte" =  'PatientSafetyQualityVTE_Projection',
+    "ma" =  'PatientSafetyQualityMA_Projection'
     )
 
   if(!is.null(n)) return(available[[n]])
