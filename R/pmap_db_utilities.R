@@ -9,6 +9,8 @@
 #' to a variable called `default_engine`.
 #' @param dbname string name of database to connect to
 #' @param username username for the database connection
+#' @param password password (default is NULL); option to provide password; leave this blank will result
+#' in getPass being called for interactive entry of password
 #' @param server defaults to 'ESMPMDBPR4.WIN.AD.JHU.EDU', but another string server could be provided
 #' @param driver defaults to 'FreeTDS'
 #' @param tdsver defaults to "8.0"

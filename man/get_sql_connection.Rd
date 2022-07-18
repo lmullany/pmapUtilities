@@ -7,6 +7,7 @@
 get_sql_connection(
   dbname,
   username,
+  password = NULL,
   server = "ESMPMDBPR4.WIN.AD.JHU.EDU",
   driver = "FreeTDS",
   tdsver = "8.0",
@@ -18,6 +19,9 @@ get_sql_connection(
 \item{dbname}{string name of database to connect to}
 
 \item{username}{username for the database connection}
+
+\item{password}{password (default is NULL); option to provide password; leave this blank will result
+in getPass being called for interactive entry of password}
 
 \item{server}{defaults to 'ESMPMDBPR4.WIN.AD.JHU.EDU', but another string server could be provided}
 
