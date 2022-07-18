@@ -1,6 +1,6 @@
 Package: pmapUtilities
 Title: API to PMAP Projections
-Version: 1.0.0.0003
+Version: 1.0.0.0004
 Authors@R:
     person(given = "Luke",
            family = "Mullany",
