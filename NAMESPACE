@@ -3,6 +3,7 @@
 export("%>%")
 export(gen_random_table)
 export(gen_temp_indices)
+export(get_database_names)
 export(get_keys)
 export(get_sql_connection)
 export(get_table_dim)

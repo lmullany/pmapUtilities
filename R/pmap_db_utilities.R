@@ -1,5 +1,28 @@
+#' Get a list of all databases
+#'
+#' This function will connect to "master", and thus does require at least `username` or `trusted=F`
+#' and will return a list of all db objects, that subsequently might be passed to `db_name` of the
+#' get_sql_connection function
+#' @param pattern a regular expression to limit searching for dbnames
+#' @param ... passed to get_sql_connection()
+#' @return a tibble of database names, id, create_dates for the databases found at the
+#' connection to the server as dictated by `...` passed to `get_sql_connection()`
+#' @export
+#' @examples
+#' get_database_names(trusted=T)
+#' get_database_names(username="<jhed_id>")
+#' get_database_names(username="<jhed_id>", pattern="(?i)covid")
 
-
+get_database_names <- function(pattern=NULL, ...) {
+  conn  = get_sql_connection(dbname="master", ...)
+  query = "select name, database_id, create_date from sys.databases"
+  dbs = query_db(query, engine=conn) %>% dplyr::collect()
+  if(!is.null(pattern)) {
+    dbs = dbs %>%
+      dplyr::filter(stringr::str_detect(name, pattern=stringr::regex(pattern)))
+  }
+  return(dbs)
+}
 #' Generate a dbConnect object to the SQL database
 #'
 #' This function generates a connection object. Note that most of the functions in pmapUtilities
@@ -22,7 +45,7 @@
 #' @examples
 #' default_engine = get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
 
-get_sql_connection <- function(dbname,
+get_sql_connection <- function(dbname = "master",
                                username,
                                password=NULL,
                                server='ESMPMDBPR4.WIN.AD.JHU.EDU',
