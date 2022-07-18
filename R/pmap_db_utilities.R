@@ -19,7 +19,7 @@ get_database_names <- function(pattern=NULL, ...) {
   dbs = query_db(query, engine=conn) %>% dplyr::collect()
   if(!is.null(pattern)) {
     dbs = dbs %>%
-      dplyr::filter(stringr::str_detect(name, pattern=regex(pattern)))
+      dplyr::filter(stringr::str_detect(name, pattern=stringr::regex(pattern)))
   }
   return(dbs)
 }
