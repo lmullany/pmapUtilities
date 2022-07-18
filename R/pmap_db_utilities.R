@@ -22,6 +22,7 @@
 
 get_sql_connection <- function(dbname,
                                username,
+                               password=NULL,
                                server='ESMPMDBPR4.WIN.AD.JHU.EDU',
                                driver='FreeTDS',
                                tdsver="8.0",
@@ -40,13 +41,19 @@ get_sql_connection <- function(dbname,
                  port = 1433)
   } else {
     user = paste0("win\\",username)
+    if(is.null(password)) {
+      pwd=getPass::getPass(paste0("Enter Password for ", username, ": "))
+    } else {
+      pwd = password
+    }
     con<-DBI::dbConnect(odbc::odbc(),
                         port=port,
                         driver=driver,
                         server=server,
                         database=dbname,
                         uid=user,
-                        pwd=getPass::getPass(paste0("Enter Password for ", username, ": ")),
+                        #pwd=getPass::getPass(paste0("Enter Password for ", username, ": ")),
+                        pwd = pwd,
                         TDS_version=tdsver)
   }
 
