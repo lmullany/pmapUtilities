@@ -5,7 +5,7 @@
 \title{Generate a dbConnect object to the SQL database}
 \usage{
 get_sql_connection(
-  dbname,
+  dbname = "master",
   username,
   password = NULL,
   server = "ESMPMDBPR4.WIN.AD.JHU.EDU",
