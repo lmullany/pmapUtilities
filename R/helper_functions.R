@@ -33,3 +33,22 @@ pmap_dbs <- function(n=NULL) {
 
 
 }
+
+#' Count rows, optionally by group.
+#'
+#' This is a convenience function to count rows of a resultset, optionally by group
+#' @param qry The result set (query/table/view) to return row count for.
+#' @param byvars optional string vector of column names
+#' @param sort boolean indicating whether to sort or not (default is F)
+#' @export
+#' @examples
+#' count(qry)
+#' count(qry, byvars=c("var1", "var2"), sort=T)
+
+count <- function(qry, byvars=NULL, sort=F) {
+  if(!is.null(byvars)) {
+    dplyr::count(qry, dplyr::across(dplyr::all_of(byvars)),sort=sort)
+  } else {
+    dplyr::count(qry, sort=sort)
+  }
+}
