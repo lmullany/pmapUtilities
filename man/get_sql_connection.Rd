@@ -6,7 +6,7 @@
 \usage{
 get_sql_connection(
   dbname = "master",
-  username,
+  username = NULL,
   password = NULL,
   server = "ESMPMDBPR4.WIN.AD.JHU.EDU",
   driver = "FreeTDS",

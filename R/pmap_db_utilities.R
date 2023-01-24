@@ -46,7 +46,7 @@ get_database_names <- function(pattern=NULL, ...) {
 #' default_engine = get_sql_connection(dbname = 'CAMP_PMCoE_Projection', username='<jhedid>')
 
 get_sql_connection <- function(dbname = "master",
-                               username,
+                               username = NULL,
                                password=NULL,
                                server='ESMPMDBPR4.WIN.AD.JHU.EDU',
                                driver='FreeTDS',
@@ -65,7 +65,12 @@ get_sql_connection <- function(dbname = "master",
                  Trusted_Connection="yes",
                  port = 1433)
   } else {
+
+    if(is.null(username)) {
+      username=readline(prompt = "Enter jhed id: ")
+    }
     user = paste0("win\\",username)
+
     if(is.null(password)) {
       pwd=getPass::getPass(paste0("Enter Password for ", username, ": "))
     } else {
